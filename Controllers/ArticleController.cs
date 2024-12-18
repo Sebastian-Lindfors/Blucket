@@ -74,4 +74,30 @@ public class ArticleController : Controller
 
         return View(vm);
     }
+
+    public IActionResult Delete(Article article)
+    {
+        if (article == null)
+        {
+            return NotFound();
+        }
+
+        var vm = new ArticleDeleteVm
+        {
+            Article = article
+        };
+
+        return View(vm);
+    }
+
+    [HttpPost]
+    public IActionResult Delete(ArticleDeleteVm vm)
+    {
+        if (ModelState.IsValid)
+        {
+            return Ok();
+        }
+
+        return View(vm);
+    }
 }

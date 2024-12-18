@@ -1,5 +1,5 @@
 @model ArticleEditVm
-<h3>Edit the posted article (Artikel. Hjälp) @Model.Article.Name</h3>
+<h3>Redigera existerande artikel (Artikel. Hjälp) @Model.Article.Name</h3>
 
 <form asp-action="Edit">
     <input type="hidden" asp-for="Article.Id" />
@@ -20,5 +20,7 @@
         <input asp-for="Article.Price" class="form-control" />
         <span asp-validation-for="Article.Price" class="text-danger"></span>
     </div>
-
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary mt-2" />
+    </div>
 </form>

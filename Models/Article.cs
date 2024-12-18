@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Blocket.Models;
 
@@ -19,4 +20,10 @@ public class Article
 
     [Required]
     public DateTime? Published { get; set; }
+
+    // Foreign key for the user.
+    public string? UserId { get; set; }
+
+    // Navigation property(?)
+    public IdentityUser User { get; set; }
 }
