@@ -1,4 +1,8 @@
 @model ArticleIndexVm
+@inject Blocket.Services.UserService UserService
+@{
+    var isAdmin = await UserService.IsCurrentUserAdministratorAsync();
+}
 
 <h1>Article Index!</h1>
 
@@ -22,6 +26,10 @@
             <th>
                 Published
             </th>
+            @if (isAdmin)
+            {
+                <th></th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -43,6 +51,13 @@
                 <td>
                     @article.Published
                 </td>
+
+                @if (isAdmin)
+                {
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@article.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

@@ -27,7 +27,7 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete">
+    <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="Article.Id" />
         <a href="/Article" class="btn btn-primary">Tillbaka till artiklar</a>
         <input type="submit" value="Delete" class="btn btn-danger" />

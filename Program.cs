@@ -1,4 +1,5 @@
 using Blocket.Models;
+using Blocket.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI();
+
+builder.Services.AddTransient<DatabaseSetupService>();
+builder.Services.AddTransient<UserService>();
 
 var app = builder.Build();
 
@@ -38,5 +42,12 @@ app.MapControllerRoute(
     .WithStaticAssets();
 
 app.MapRazorPages();
+
+// Initialize the database
+using (var scope = app.Services.CreateScope())
+{
+    var DatabaseSetupService = scope.ServiceProvider.GetRequiredService<DatabaseSetupService>();
+    await DatabaseSetupService.InitializeAsync();
+}
 
 app.Run();

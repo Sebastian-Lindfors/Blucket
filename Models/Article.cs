@@ -25,5 +25,5 @@ public class Article
     public string? UserId { get; set; }
 
     // Navigation property(?)
-    public IdentityUser User { get; set; }
+    public IdentityUser? User { get; set; }
 }
