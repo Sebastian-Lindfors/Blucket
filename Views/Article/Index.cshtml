@@ -1,0 +1,51 @@
+@model ArticleIndexVm
+
+<h1>Article Index!</h1>
+
+<a asp-action="Create">Add Article</a>
+
+<hr>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Published
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model.Articles)
+        {
+            <tr>
+                <td>
+                    @article.Id
+                </td>
+                <td>
+                    @article.Name
+                </td>
+                <td>
+                    @article.Description
+                </td>
+                <td>
+                    @article.Price
+                </td>
+                <td>
+                    @article.Published
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
