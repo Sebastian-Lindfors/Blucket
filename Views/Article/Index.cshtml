@@ -6,14 +6,11 @@
 
 <h1>Article Index!</h1>
 
-<a asp-action="Create">Add Article</a> <a asp-action="Delete">Delete Article</a>
+<a asp-action="Create" class="btn btn-primary">Add Article</a>
 <hr>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                Id
-            </th>
             <th>
                 Name
             </th>
@@ -37,10 +34,16 @@
         {
             <tr>
                 <td>
-                    @article.Id
-                </td>
-                <td>
-                    @article.Name
+                    @if (isAdmin)
+                    {
+                        <a asp-action="Edit" asp-route-id="@article.Id">
+                            @article.Name
+                        </a>
+                    }
+                    else
+                    {
+                        @article.Name
+                    }
                 </td>
                 <td>
                     @article.Description

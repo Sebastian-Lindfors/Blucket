@@ -115,8 +115,28 @@ public class ArticleController(ApplicationDbContext context) : Controller
             return NotFound();
         }
 
+        if (!IsAuthorized(article))
+        {
+            // If the user is not authorized...
+            return Forbid();
+        }
+
         context.Remove(article);
         await context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
+    }
+
+
+    private bool IsAuthorized(Article article)
+    {
+        var isAdmin = User.IsInRole(RoleConstants.Administrator);
+        var isUser = User.FindFirstValue(ClaimTypes.NameIdentifier) == article.UserId;
+
+        if (isAdmin || isUser)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
