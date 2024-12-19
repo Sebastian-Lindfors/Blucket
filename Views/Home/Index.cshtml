@@ -6,57 +6,46 @@
     var isUser = await UserService.IsUserAsync();
 }
 
-<h1>Dina upplagda artiklar</h1>
+<div class="container mt-2">
+    <h1 class="text-center mb-3">Dina upplagda artiklar</h1>
 
-@if (isAdmin || isUser)
-{
-    <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
-}
-<hr>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Namn
-            </th>
-            <th>
-                Beskrivning
-            </th>
-            <th>
-                Pris
-            </th>
-            <th>
-                Uppladdad
-            </th>
-            <th>
+    @if (isAdmin || isUser)
+    {
+        <div class="text-center mb-4">
+            <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
+        </div>
+    }
 
-            </th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var article in Model.Articles)
-        {
-            <tr>
-                <td>
-                    <a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id">
-                        @article.Name
-                    </a>
-                </td>
-                <td>
-                    @article.Description
-                </td>
-                <td>
-                    @article.Price
-                </td>
-                <td>
-                    @article.Published
-                </td>
-                <td>
-                    <a asp-controller="Article" asp-action="Delete" asp-route-id="@article.Id"
-                        class="btn btn-danger">Radera</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="card shadow-sm rounded">
+        <div class="card-body">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Namn</th>
+                        <th>Beskrivning</th>
+                        <th>Pris</th>
+                        <th>Uppladdad</th>
+                        <th>Åtgärder</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var article in Model.Articles)
+                    {
+                        <tr>
+                            <td><b>@article.Name</b></td>
+                            <td>@article.Description</td>
+                            <td>@article.Price</td>
+                            <td>@article.Published</td>
+                            <td>
+                                <a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id"
+                                    class="btn btn-primary btn-sm mr-2">Redigera</a>
+                                <a asp-controller="Article" asp-action="Delete" asp-route-id="@article.Id"
+                                    class="btn btn-danger btn-sm">Radera</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
