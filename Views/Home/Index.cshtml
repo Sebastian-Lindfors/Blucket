@@ -1,23 +1,62 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-
+﻿@model HomeIndexVm
+@inject Blocket.Services.UserService UserService
+@inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Home Page";
+    var isAdmin = await UserService.IsCurrentUserAdministratorAsync();
+    var isUser = await UserService.IsUserAsync();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Blucket</h1>
-    <p>Blocket - but worse</p>
+<h1>Dina upplagda artiklar</h1>
 
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <p>
-            You are signed in as @UserManager.GetUserName(User)
-        </p>
+@if (isAdmin || isUser)
+{
+    <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
+}
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Namn
+            </th>
+            <th>
+                Beskrivning
+            </th>
+            <th>
+                Pris
+            </th>
+            <th>
+                Uppladdad
+            </th>
+            <th>
 
-        <form method="post" asp-area="Identity" asp-page="/Account/Logout">
-            <button type="submit" class="btn btn-primary">Logout</button>
-        </form>
-    }
-</div>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model.Articles)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id">
+                        @article.Name
+                    </a>
+                </td>
+                <td>
+                    @article.Description
+                </td>
+                <td>
+                    @article.Price
+                </td>
+                <td>
+                    @article.Published
+                </td>
+                <td>
+                    <a asp-controller="Article" asp-action="Delete" asp-route-id="@article.Id"
+                        class="btn btn-danger">Radera</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

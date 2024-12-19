@@ -55,6 +55,11 @@ public class ArticleController(ApplicationDbContext context) : Controller
             return NotFound();
         }
 
+        if (!IsAuthorized(article.UserId))
+        {
+            return Forbid();
+        }
+
         var vm = new ArticleEditVm
         {
             Id = article.Id,
@@ -79,6 +84,11 @@ public class ArticleController(ApplicationDbContext context) : Controller
             if (article == null)
             {
                 return NotFound();
+            }
+
+            if (!IsAuthorized(article.UserId))
+            {
+                return Forbid();
             }
 
             // Change article values:

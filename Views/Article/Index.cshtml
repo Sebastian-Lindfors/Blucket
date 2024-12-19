@@ -8,7 +8,7 @@
 
 <h1>Postade artiklar</h1>
 
-@if (isAdmin || isUser)
+@if (isAdmin)
 {
     <a asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
 }
@@ -39,7 +39,7 @@
         {
             <tr>
                 <td>
-                    @if (isAdmin || isUser)
+                    @if (isAdmin)
                     {
                         <a asp-action="Edit" asp-route-id="@article.Id">
                             @article.Name
