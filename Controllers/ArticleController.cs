@@ -26,6 +26,11 @@ public class ArticleController(ApplicationDbContext context) : Controller
     {
         vm.Article.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+        if (vm.Article.UserId == null || !IsAuthorized(vm.Article.UserId))
+        {
+            return Forbid();
+        }
+
         if (ModelState.IsValid)
         {
             if (vm.Article.Published.HasValue)
@@ -41,8 +46,10 @@ public class ArticleController(ApplicationDbContext context) : Controller
         return View(vm);
     }
 
-    public IActionResult Edit(Article article)
+    public async Task<IActionResult> Edit(int id)
     {
+        Article? article = await context.Articles.FirstOrDefaultAsync(a => a.Id == id);
+
         if (article == null)
         {
             return NotFound();
@@ -50,7 +57,10 @@ public class ArticleController(ApplicationDbContext context) : Controller
 
         var vm = new ArticleEditVm
         {
-            Article = article
+            Id = article.Id,
+            Name = article.Name,
+            Description = article.Description,
+            Price = article.Price
         };
 
         return View(vm);
@@ -60,21 +70,23 @@ public class ArticleController(ApplicationDbContext context) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(ArticleEditVm vm)
     {
-        var article = vm.Article;
+        // var article = vm.Article;
 
         if (ModelState.IsValid)
         {
-            if (!context.Articles.Any(e => e.Id == article.Id))
+            Article? article = await context.Articles.FirstOrDefaultAsync(a => a.Id == vm.Id);
+
+            if (article == null)
             {
                 return NotFound();
             }
 
-            if (article.Published.HasValue)
-            {
-                article.Published = vm.Article.Published!.Value.ToUniversalTime();
-            }
+            // Change article values:
+            article.Name = vm.Name;
+            article.Description = vm.Description;
+            article.Price = vm.Price;
 
-            context.Update(vm.Article);
+            context.Update(article);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -131,6 +143,18 @@ public class ArticleController(ApplicationDbContext context) : Controller
     {
         var isAdmin = User.IsInRole(RoleConstants.Administrator);
         var isUser = User.FindFirstValue(ClaimTypes.NameIdentifier) == article.UserId;
+
+        if (isAdmin || isUser)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    private bool IsAuthorized(string articleUserId)
+    {
+        var isAdmin = User.IsInRole(RoleConstants.Administrator);
+        var isUser = User.FindFirstValue(ClaimTypes.NameIdentifier) == articleUserId;
 
         if (isAdmin || isUser)
         {

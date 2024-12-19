@@ -1,27 +1,32 @@
 @model ArticleIndexVm
 @inject Blocket.Services.UserService UserService
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     var isAdmin = await UserService.IsCurrentUserAdministratorAsync();
+    var isUser = await UserService.IsUserAsync();
 }
 
-<h1>Article Index!</h1>
+<h1>Postade artiklar</h1>
 
-<a asp-action="Create" class="btn btn-primary">Add Article</a>
+@if (isAdmin || isUser)
+{
+    <a asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
+}
 <hr>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Name
+                Namn
             </th>
             <th>
-                Description
+                Beskrivning
             </th>
             <th>
-                Price
+                Pris
             </th>
             <th>
-                Published
+                Uppladdad
             </th>
             @if (isAdmin)
             {
@@ -34,7 +39,7 @@
         {
             <tr>
                 <td>
-                    @if (isAdmin)
+                    @if (isAdmin || isUser)
                     {
                         <a asp-action="Edit" asp-route-id="@article.Id">
                             @article.Name
@@ -58,7 +63,7 @@
                 @if (isAdmin)
                 {
                     <td>
-                        <a asp-action="Delete" asp-route-id="@article.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="Delete" asp-route-id="@article.Id" class="btn btn-danger">Radera</a>
                     </td>
                 }
             </tr>

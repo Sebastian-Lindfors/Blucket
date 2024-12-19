@@ -1,0 +1,31 @@
+@model UsersIndexVm
+
+<h1>User Index</h1>
+<a asp-action="Create">Create new user</a>
+<hr>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Användare</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>
+                    @user.UserName
+                </td>
+                <td>
+                    @user.Email
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

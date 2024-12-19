@@ -22,4 +22,16 @@ public class UserService(UserManager<IdentityUser> userManager, IHttpContextAcce
 
         return await userManager.IsInRoleAsync(user, RoleConstants.Administrator);
     }
+
+    public async Task<bool> IsUserAsync()
+    {
+        var user = httpContextAccessor.HttpContext?.User;
+
+        if (user == null)
+        {
+            return false;
+        }
+
+        return await Task.FromResult(user?.Identity?.IsAuthenticated ?? false);
+    }
 }

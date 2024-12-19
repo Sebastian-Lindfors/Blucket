@@ -1,25 +1,26 @@
 @model ArticleEditVm
-<h3>Redigera existerande artikel (Artikel. Hjälp) @Model.Article.Name</h3>
+<h3>Redigera existerande artikel (Artikel. Hjälp)</h3>
 
 <form asp-action="Edit">
-    <input type="hidden" asp-for="Article.Id" />
+    <input type="hidden" asp-for="Id" />
     <div class="form-group">
-        <label asp-for="Article.Name" class="control-label"></label>
-        <input asp-for="Article.Name" class="form-control" />
-        <span asp-validation-for="Article.Name" class="text-danger"></span>
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Article.Description" class="control-label"></label>
-        <input asp-for="Article.Description" class="form-control" />
-        <span asp-validation-for="Article.Description" class="text-danger"></span>
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Article.Price" class="control-label"></label>
-        <input asp-for="Article.Price" class="form-control" />
-        <span asp-validation-for="Article.Price" class="text-danger"></span>
+        <label asp-for="Price" class="control-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary mt-2" />
     </div>

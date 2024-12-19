@@ -1,8 +1,23 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Blucket</h1>
-    <p>Homepage!</p>
+    <p>Blocket - but worse</p>
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <p>
+            You are signed in as @UserManager.GetUserName(User)
+        </p>
+
+        <form method="post" asp-area="Identity" asp-page="/Account/Logout">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+    }
 </div>

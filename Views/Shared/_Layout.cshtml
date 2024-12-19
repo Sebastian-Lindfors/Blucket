@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject Blocket.Services.UserService UserService
+@{
+    var isAdmin = await UserService.IsCurrentUserAdministratorAsync();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,7 +40,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Article"
                                 asp-action="Index">Article</a>
-                        </li>
+                            @if (isAdmin)
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User"
+                                    asp-action="Index">Användarbas</a>
+                            </li>
+                            }
                     </ul>
                 </div>
             </div>
