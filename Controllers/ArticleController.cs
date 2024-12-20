@@ -50,7 +50,8 @@ public class ArticleController(ApplicationDbContext context) : Controller
     {
         Article? article = await context.Articles.FirstOrDefaultAsync(a => a.Id == id);
 
-        if (article == null)
+        // "article.UserId == null" prevents a possibly nullable warning. Theoretically UserId Should never be null.
+        if (article == null || article.UserId == null)
         {
             return NotFound();
         }
@@ -81,10 +82,12 @@ public class ArticleController(ApplicationDbContext context) : Controller
         {
             Article? article = await context.Articles.FirstOrDefaultAsync(a => a.Id == vm.Id);
 
-            if (article == null)
+            // "article.UserId == null" prevents a possibly nullable warning. Theoretically UserId Should never be null.
+            if (article == null || article.UserId == null)
             {
                 return NotFound();
             }
+
 
             if (!IsAuthorized(article.UserId))
             {
@@ -104,7 +107,7 @@ public class ArticleController(ApplicationDbContext context) : Controller
         return View(vm);
     }
 
-    public async Task<IActionResult> Delete(Article article)
+    public async Task<IActionResult> Delete(Article article, string previous)
     {
         var _article = await context.Articles.FirstOrDefaultAsync(a => a.Id == article.Id);
 
@@ -115,7 +118,8 @@ public class ArticleController(ApplicationDbContext context) : Controller
 
         var vm = new ArticleDeleteVm
         {
-            Article = _article
+            Article = _article,
+            Previous = previous
         };
 
         return View(vm);
@@ -123,7 +127,7 @@ public class ArticleController(ApplicationDbContext context) : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int id, string previous)
     {
         if (!ModelState.IsValid)
         {
@@ -145,6 +149,12 @@ public class ArticleController(ApplicationDbContext context) : Controller
 
         context.Remove(article);
         await context.SaveChangesAsync();
+
+        if (previous == "home")
+        {
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
         return RedirectToAction(nameof(Index));
     }
 
@@ -161,6 +171,7 @@ public class ArticleController(ApplicationDbContext context) : Controller
 
         return false;
     }
+
     private bool IsAuthorized(string articleUserId)
     {
         var isAdmin = User.IsInRole(RoleConstants.Administrator);

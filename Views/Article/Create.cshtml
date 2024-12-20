@@ -1,36 +1,42 @@
 @model ArticleCreateVm
 <div class="container d-flex justify-content-center">
     <div class="col-md-6">
-        <h1 class="text-center mb-2">Ladda upp en ny annons</h1>
-        <p class="text-center mb-2">Fyll i informationen nedan för att skapa en ny artikel.</p>
-        <hr>
 
-        <form asp-action="Create">
-            <div class="form-group mb-3">
-                <label asp-for="Article.Name" class="form-label">Artikelnamn</label>
-                <input type="text" asp-for="Article.Name" class="form-control" placeholder="Ange artikelns namn" />
-                <span asp-validation-for="Article.Name" class="text-danger"></span>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="text-center mb-2">Ladda upp en ny annons</h1>
+                <p class="text-center mb-2">Fyll i informationen nedan för att skapa en ny artikel</p>
+                <hr>
+
+                <form asp-action="Create">
+                    <div class="form-group mb-3">
+                        <label asp-for="Article.Name" class="form-label">Artikelnamn</label>
+                        <input type="text" asp-for="Article.Name" class="form-control"
+                            placeholder="Ange artikelns namn" />
+                        <span asp-validation-for="Article.Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Article.Description" class="form-label">Beskrivning</label>
+                        <input type="text" asp-for="Article.Description" class="form-control"
+                            placeholder="Ange en beskrivning av artikeln" />
+                        <span asp-validation-for="Article.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Article.Price" class="form-label">Pris</label>
+                        <input type="number" step=".01" asp-for="Article.Price" class="form-control"
+                            placeholder="Ange priset för artikeln" />
+                        <span asp-validation-for="Article.Price" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="Article.Published" value="@DateTime.Now" />
+
+                    <div class="form-group text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">🎉 Ladda upp annons</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Article.Description" class="form-label">Beskrivning</label>
-                <input type="text" asp-for="Article.Description" class="form-control"
-                    placeholder="Ange en beskrivning av artikeln" />
-                <span asp-validation-for="Article.Description" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Article.Price" class="form-label">Pris</label>
-                <input type="number" step=".01" asp-for="Article.Price" class="form-control"
-                    placeholder="Ange priset för artikeln" />
-                <span asp-validation-for="Article.Price" class="text-danger"></span>
-            </div>
-
-            <input type="hidden" asp-for="Article.Published" value="@DateTime.Now" />
-
-            <div class="form-group text-center mt-4">
-                <button type="submit" class="btn btn-primary btn-lg">🎉 Ladda upp annons</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

@@ -6,20 +6,19 @@
     var isUser = await UserService.IsUserAsync();
 }
 
-<div class="container mt-2">
-    <h1 class="text-center mb-3">Dina upplagda artiklar</h1>
-
-    @if (isAdmin || isUser)
-    {
-        <div class="text-center mb-4">
-            <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
-        </div>
-    }
-
+<body style="background-image: url('/images/christmas-market.jpg'); background-size: cover; background-position: center center; background-attachment: fixed; min-height: 100vh;"/>
+@if (isAdmin || isUser)
+{
     <div class="card shadow-sm rounded">
         <div class="card-body">
             <table class="table mb-0">
                 <thead>
+                <div class="container mt-2">
+    <h1 class="text-center mb-2">Dina upplagda artiklar</h1>
+        <div class="form-group mt-2 mb-2 text-center">
+            <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>
+        </div>
+        <hr>
                     <tr>
                         <th>Namn</th>
                         <th>Beskrivning</th>
@@ -38,8 +37,8 @@
                             <td>@article.Published</td>
                             <td>
                                 <a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id"
-                                    class="btn btn-primary btn-sm mr-2">Redigera</a>
-                                <a asp-controller="Article" asp-action="Delete" asp-route-id="@article.Id"
+                                    class="btn btn-success btn-sm mr-2">Redigera</a>
+                                <a asp-controller="Article" asp-action="Delete" asp-route-previous="home" asp-route-id="@article.Id"
                                     class="btn btn-danger btn-sm">Radera</a>
                             </td>
                         </tr>
@@ -48,4 +47,31 @@
             </table>
         </div>
     </div>
+}
+
+else 
+
+{
+   <div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-8 text-center">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="display-4 mb-3"><strong>Välkommen till Blucket!</strong></h1>
+                <p class="lead mb-1">Vi är glada att du är här! Blucket är din plats för att köpa och sälja artiklar enkelt och tryggt.</p>
+
+                <p class="lead mb-3">För att komma igång, vänligen registrera dig eller logga in för att skapa din första annons.</p>
+
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="/Identity/Account/Register" class="btn btn-primary btn-lg">Registrera dig</a>
+                    <a href="/Identity/Account/Login" class="btn btn-success btn-lg">Logga in</a>
+                </div>
+                <img src="/images/blucket-nobg.png" alt="" class="img-fluid mb-4 mt-5" style="max-width: 60%;">
+
+                <hr class="my-4">
+
+                <p class="text-muted">Redan en användare? <a href="/Identity/Account/Login" class="text-primary">Logga in här</a>.</p>
+            </div>
+        </div>
+    </div>
 </div>
+}

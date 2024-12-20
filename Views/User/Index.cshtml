@@ -23,7 +23,8 @@
                     @user.Email
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Delete</a>
+                    <a asp-action="Update" asp-route-id="@user.Id" class="btn btn-primary">Uppdatera</a>
+                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Ta bort</a>
                 </td>
             </tr>
         }

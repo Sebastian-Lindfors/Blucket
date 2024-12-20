@@ -22,18 +22,18 @@ public class StrongPasswordAttribute : ValidationAttribute
 
     public StrongPasswordAttribute() : base(DefaultErrorMessage) { }
 
-    public override bool IsValid(object value)
+    public override bool IsValid(object? value)
     {
         if (value == null) return false;
 
         var password = value.ToString();
 
         // Ensure the password meets the required criteria
-        bool hasUppercase = Regex.IsMatch(password, @"[A-Z]");
-        bool hasLowercase = Regex.IsMatch(password, @"[a-z]");
-        bool hasDigit = Regex.IsMatch(password, @"\d");
-        bool hasSpecialChar = Regex.IsMatch(password, @"[\W_]");
-        bool isValidLength = password.Length >= 6;
+        bool hasUppercase = Regex.IsMatch(password!, @"[A-Z]");
+        bool hasLowercase = Regex.IsMatch(password!, @"[a-z]");
+        bool hasDigit = Regex.IsMatch(password!, @"\d");
+        bool hasSpecialChar = Regex.IsMatch(password!, @"[\W_]");
+        bool isValidLength = password!.Length >= 6;
 
         return hasUppercase && hasLowercase && hasDigit && hasSpecialChar && isValidLength;
     }

@@ -1,0 +1,29 @@
+@model UsersUpdateVm
+
+<h1>Update user</h1>
+<p>@Model.User.Email</p>
+
+<div class="card shadow-sm rounded">
+    <div class="card-body">
+        <h3 class="card-title">Redigera användare:</h3>
+
+        <form asp-action="Update">
+            <input type="hidden" asp-for="User.Id">
+
+            <div class="form-group">
+                <label asp-for="User.UserName" class="control-label">Användarnamn</label>
+                <input type="text" asp-for="User.UserName" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="User.Email">Email</label>
+                <input type="text" asp-for="User.Email" class="form-control">
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Uppdatera</button>
+                <a href="/User" class="btn btn-primary">Tillbaka</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -4,11 +4,11 @@
 
 <div class="card">
     <div class="card-body">
-        <p class="card-text"><b>Användarnamn:</b> @Model.User.UserName</p>
-        <p class="card-text"><b>Email:</b> @Model.User.Email</p>
+        <p class="card-text"><b>Användarnamn:</b> @Model.User?.UserName</p>
+        <p class="card-text"><b>Email:</b> @Model.User?.Email</p>
 
         <form asp-action="Delete" method="post">
-            <input type="hidden" asp-for="User.Id">
+            <input type="hidden" asp-for="User!.Id">
             <button type="submit" value="Delete" class="btn btn-danger">Ta bort</button>
             <a href="/User" class="btn btn-primary">Tillbaka</a>
         </form>

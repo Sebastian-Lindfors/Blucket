@@ -64,6 +64,46 @@ public class UserController(
         return View(vm);
     }
 
+    [Authorize(Roles = RoleConstants.Administrator)]
+    public async Task<IActionResult> Update(User user)
+    {
+        var usr = await context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
+        if (usr == null)
+        {
+            return NotFound();
+        }
+
+        var vm = new UsersUpdateVm { User = usr };
+
+        return View(vm);
+    }
+
+    [Authorize(Roles = RoleConstants.Administrator)]
+    [HttpPost]
+    public async Task<IActionResult> Update(UsersUpdateVm vm)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(vm);
+        }
+
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == vm.User!.Id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        user.UserName = vm.User?.UserName;
+        user.Email = vm.User?.Email;
+        var result = await userManager.UpdateAsync(user);
+
+        if (!result.Succeeded)
+        {
+            throw new Exception("Could not update user.");
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 
     [Authorize(Roles = RoleConstants.Administrator)]
     public async Task<IActionResult> Delete(User user)
@@ -97,6 +137,19 @@ public class UserController(
             return NotFound();
         }
 
+        if (await userManager.IsInRoleAsync(user, RoleConstants.Administrator))
+        {
+            return Forbid();
+        }
+
+        // Delete all of the users articles.
+        var userArticles = await context.Articles.Where(a => a.UserId == user.Id).ToListAsync();
+        foreach (var article in userArticles)
+        {
+            context.Remove(article);
+        }
+
+        // Remove the user, save the changes and redirect.
         context.Remove(user);
         await context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));

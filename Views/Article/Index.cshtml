@@ -6,67 +6,75 @@
     var isUser = await UserService.IsUserAsync();
 }
 
-<h1>Postade artiklar</h1>
 
-@if (isAdmin)
-{
-    <a asp-action="Create" class="btn btn-primary">Lägg till artikel</a>
-}
-<hr>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Namn
-            </th>
-            <th>
-                Beskrivning
-            </th>
-            <th>
-                Pris
-            </th>
-            <th>
-                Uppladdad
-            </th>
-            @if (isAdmin)
-            {
-                <th></th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var article in Model.Articles)
-        {
-            <tr>
-                <td>
+<div class="d-flex justify-content-center mb-2">
+    @if (isAdmin)
+    {
+        <a asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>
+    }
+</div>
+
+<div class="card shadow-sm rounded">
+    <div class="card-body">
+        <table class="table mb-0">
+            <thead>
+                <h1 class="text-center mb-2">Postade artiklar</h1>
+                <hr>
+                <tr>
+                    <th>
+                        Namn
+                    </th>
+                    <th>
+                        Beskrivning
+                    </th>
+                    <th>
+                        Pris
+                    </th>
+                    <th>
+                        Uppladdad
+                    </th>
                     @if (isAdmin)
                     {
-                        <a asp-action="Edit" asp-route-id="@article.Id">
-                            @article.Name
-                        </a>
+                        <th></th>
                     }
-                    else
-                    {
-                        @article.Name
-                    }
-                </td>
-                <td>
-                    @article.Description
-                </td>
-                <td>
-                    @article.Price
-                </td>
-                <td>
-                    @article.Published
-                </td>
-
-                @if (isAdmin)
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var article in Model.Articles)
                 {
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@article.Id" class="btn btn-danger">Radera</a>
-                    </td>
+                    <tr>
+                        <td>
+                            @if (isAdmin)
+                            {
+                                <a asp-action="Edit" asp-route-id="@article.Id">
+                                    @article.Name
+                                </a>
+                            }
+                            else
+                            {
+                                @article.Name
+                            }
+                        </td>
+                        <td>
+                            @article.Description
+                        </td>
+                        <td>
+                            @article.Price
+                        </td>
+                        <td>
+                            @article.Published
+                        </td>
+
+                        @if (isAdmin)
+                        {
+                            <td>
+                                <a asp-action="Delete" asp-route-previous="article" asp-route-id="@article.Id"
+                                    class="btn btn-danger">Radera</a>
+                            </td>
+                        }
+                    </tr>
                 }
-            </tr>
-        }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
