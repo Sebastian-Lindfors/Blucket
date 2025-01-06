@@ -1,32 +1,40 @@
 @model UsersIndexVm
 
-<h1>User Index</h1>
-<a asp-action="Create">Create new user</a>
-<hr>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Användare</th>
-            <th>Email</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
-            <tr>
-                <td>
-                    @user.UserName
-                </td>
-                <td>
-                    @user.Email
-                </td>
-                <td>
-                    <a asp-action="Update" asp-route-id="@user.Id" class="btn btn-primary">Uppdatera</a>
-                    <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Ta bort</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card shadow-sm rounded">
+    <div class="card-body">
+
+        <div class="form-group mt-2 mb-2 text-center">
+            <h1>Användare</h1>
+            <a asp-action="Create" class="btn btn-primary">Skapa ny användare</a>
+            <hr>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Användare</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            @user.UserName
+                        </td>
+                        <td>
+                            @user.Email
+                        </td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@user.Id" class="btn btn-primary">Uppdatera</a>
+                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Ta bort</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
