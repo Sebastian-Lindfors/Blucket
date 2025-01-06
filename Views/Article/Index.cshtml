@@ -6,19 +6,17 @@
     var isUser = await UserService.IsUserAsync();
 }
 
-
-<div class="d-flex justify-content-center mb-2">
-    @if (isAdmin)
-    {
-        <a asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>
-    }
-</div>
-
 <div class="card shadow-sm rounded">
     <div class="card-body">
         <table class="table mb-0">
             <thead>
                 <h1 class="text-center mb-2">Postade artiklar</h1>
+                <div class="d-flex justify-content-center mb-2">
+                    @if (isAdmin)
+                    {
+                        <a asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>
+                    }
+                </div>
                 <hr>
                 <tr>
                     <th>
@@ -52,14 +50,14 @@
                             }
                             else
                             {
-                                @article.Name
+                                <b>@article.Name</b>
                             }
                         </td>
                         <td>
                             @article.Description
                         </td>
                         <td>
-                            @article.Price
+                            @article.Price kr
                         </td>
                         <td>
                             @article.Published
