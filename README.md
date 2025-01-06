@@ -9,3 +9,4 @@
    ![PostgresQL Connectiong](image2.png)
 
 4. Run "dotnet ef database update" in your CLI to set up the tables in the database.
+   ![dotnet ef database update](image3.png)
