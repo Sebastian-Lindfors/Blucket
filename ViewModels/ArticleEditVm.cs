@@ -15,6 +15,8 @@ public class ArticleEditVm
     [MaxLength(200, ErrorMessage = "The description cannot be longer than 200 characters")]
     public string Description { get; set; } = "";
 
+    public string? ImageUrl { get; set; }
+
     [Required]
     public decimal Price { get; set; }
 }

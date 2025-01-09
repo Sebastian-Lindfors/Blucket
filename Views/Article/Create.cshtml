@@ -23,12 +23,20 @@
                         <span asp-validation-for="Article.Description" class="text-danger"></span>
                     </div>
 
+                    <div class="form-group">
+                        <label asp-for="Article.ImageUrl" class="form-label">Bild url</label>
+                        <input type="text" asp-for="Article.ImageUrl" placeholder="https://www.example.com/img.png"
+                            class="form-control">
+                    </div>
+
                     <div class="form-group mb-3">
                         <label asp-for="Article.Price" class="form-label">Pris</label>
                         <input type="number" step=".01" asp-for="Article.Price" class="form-control"
                             placeholder="Ange priset för artikeln" />
                         <span asp-validation-for="Article.Price" class="text-danger"></span>
                     </div>
+
+
 
                     <input type="hidden" asp-for="Article.Published" value="@DateTime.Now" />
 

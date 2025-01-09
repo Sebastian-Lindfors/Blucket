@@ -21,6 +21,8 @@ public class Article
     [Required]
     public DateTime? Published { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     // Foreign key for the user.
     public string? UserId { get; set; }
 
