@@ -19,6 +19,7 @@
                 </div>
                 <hr>
                 <tr>
+                    <th></th>
                     <th>
                         Namn
                     </th>
@@ -41,6 +42,9 @@
                 @foreach (var article in Model.Articles)
                 {
                     <tr>
+                        <td style="width: 10%;">
+                            <img src="@article.ImageUrl" alt="Article Image" style="width: 50%;">
+                        </td>
                         <td>
                             @if (isAdmin)
                             {

@@ -20,6 +20,7 @@
         </div>
         <hr>
                     <tr>
+                        <th></th>
                         <th>Namn</th>
                         <th>Beskrivning</th>
                         <th>Pris</th>
@@ -31,6 +32,9 @@
                     @foreach (var article in Model.Articles)
                     {
                         <tr>
+                            <td style="width: 10%;">
+                                <img src="@article.ImageUrl" alt="Article Image" style="width: 50%;">
+                            </td>
                             <td><b>@article.Name</b></td>
                             <td>@article.Description</td>
                             <td>@article.Price</td>
