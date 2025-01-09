@@ -18,6 +18,11 @@ public class ArticleController(ApplicationDbContext context) : Controller
 
     public IActionResult Create()
     {
+        if (User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+        {
+            return Forbid();
+        }
+
         return View();
     }
 
