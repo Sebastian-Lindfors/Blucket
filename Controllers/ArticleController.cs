@@ -66,7 +66,8 @@ public class ArticleController(ApplicationDbContext context) : Controller
             Id = article.Id,
             Name = article.Name,
             Description = article.Description,
-            Price = article.Price
+            Price = article.Price,
+            ImageUrl = article.ImageUrl
         };
 
         return View(vm);
@@ -98,6 +99,7 @@ public class ArticleController(ApplicationDbContext context) : Controller
             article.Name = vm.Name;
             article.Description = vm.Description;
             article.Price = vm.Price;
+            article.ImageUrl = vm.ImageUrl;
 
             context.Update(article);
             await context.SaveChangesAsync();
