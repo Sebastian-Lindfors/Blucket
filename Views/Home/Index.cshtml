@@ -9,11 +9,11 @@
 <body style="background-image: url('/images/christmas-market.jpg'); background-size: cover; background-position: center center; background-attachment: fixed; min-height: 100vh;"/>
 @if (isAdmin || isUser)
 {
-    <div class="card shadow-sm rounded">
+    <div class="card shadow-sm rounded" style="min-height: 500px;">
         <div class="card-body">
             <table class="table mb-0">
                 <thead>
-                <div class="container mt-2">
+                <div class="container">
     <h1 class="text-center mb-2">Dina upplagda artiklar</h1>
         <div class="form-group mt-2 mb-2 text-center">
             <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>

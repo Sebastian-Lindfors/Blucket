@@ -1,10 +1,20 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Åtkomst nekad";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="width: 100%; max-width: 500px; margin-top: 50px;">
+        <div class="card-body text-center">
+            <h1 class="text-danger text-shadow">@ViewData["Title"] ⚠️</h1>
+            <p class="text-danger">Du har inte åtkomst till denna sida.</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-shadow {
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+</style>

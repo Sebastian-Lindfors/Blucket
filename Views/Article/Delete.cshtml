@@ -1,39 +1,39 @@
 @model ArticleDeleteVm
 
-<div class="container d-flex justify-content-center align-items-center">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
+<div class="container d-flex justify-content-center align-items-center" style="min-width: 800px; min-height: 600px;">
+    <div class="col-md-8">
+        <div class="card shadow-sm" style="min-height: 500px;">
             <div class="card-body">
-                <h1 class="text-center mb-2">Vill du radera denna artikel?</h1>
-                <p class="text-center mb-2"><b>Det går inte att återställa efter bekräftelse</b></p>
+                <h1 class="text-center mt-3" style="font-size: 2.5rem;">Vill du radera denna artikel?</h1>
+                <p class="text-center mb-4" style="font-size: 1.2rem; font-weight: bold;">Det går inte att återställa efter bekräftelse</p>
                 <hr />
 
                 <div class="row mb-3">
                     <div class="col-12 col-md-4">
-                        <strong>Namn</strong>
+                        <strong style="font-size: 1.1rem;">Namn</strong>
                     </div>
                     <div class="col-12 col-md-8">
-                        @Html.DisplayFor(model => model.Article.Name)
+                        <p style="font-size: 1.1rem;">@Html.DisplayFor(model => model.Article.Name)</p>
                     </div>
                 </div>
                 <hr />
 
                 <div class="row mb-3">
                     <div class="col-12 col-md-4">
-                        <strong>Beskrivning</strong>
+                        <strong style="font-size: 1.1rem;">Beskrivning</strong>
                     </div>
                     <div class="col-12 col-md-8">
-                        @Html.DisplayFor(model => model.Article.Description)
+                        <p style="font-size: 1.1rem;">@Html.DisplayFor(model => model.Article.Description)</p>
                     </div>
                 </div>
                 <hr />
 
                 <div class="row mb-3">
                     <div class="col-12 col-md-4">
-                        <strong>Pris</strong>
+                        <strong style="font-size: 1.1rem;">Pris</strong>
                     </div>
                     <div class="col-12 col-md-8">
-                        @Html.DisplayFor(model => model.Article.Price)
+                        <p style="font-size: 1.1rem;">@Html.DisplayFor(model => model.Article.Price)</p>
                     </div>
                 </div>
 
@@ -41,9 +41,9 @@
                     <input type="hidden" asp-for="Article.Id" />
                     <input type="hidden" asp-for="Previous" />
 
-                    <div class="form-group text-center mt-4">
-                        <a href="/Home" class="btn btn-primary mr-3">Tillbaka till profil</a>
-                        <input type="submit" value="Radera" class="btn btn-danger" />
+                    <div class="form-group text-center mt-5">
+                        <a href="/Home" class="btn btn-primary mr-3" style="font-size: 1.2rem; padding: 10px 20px;">Tillbaka till profil</a>
+                        <input type="submit" value="Radera" class="btn btn-danger" style="font-size: 1.2rem; padding: 10px 20px;" />
                     </div>
                 </form>
             </div>
