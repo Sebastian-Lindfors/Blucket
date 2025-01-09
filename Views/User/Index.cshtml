@@ -10,31 +10,33 @@
             <hr>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Användare</th>
-                    <th>Email</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in Model.Users)
-                {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @user.UserName
-                        </td>
-                        <td>
-                            @user.Email
-                        </td>
-                        <td>
-                            <a asp-action="Update" asp-route-id="@user.Id" class="btn btn-primary">Uppdatera</a>
-                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Ta bort</a>
-                        </td>
+                        <th>Användare</th>
+                        <th>Email</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>
+                                @user.UserName
+                            </td>
+                            <td>
+                                @user.Email
+                            </td>
+                            <td>
+                                <a asp-action="Update" asp-route-id="@user.Id" class="btn btn-primary">Uppdatera</a>
+                                <a asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger">Ta bort</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

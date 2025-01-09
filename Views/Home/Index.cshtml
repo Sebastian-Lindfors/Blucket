@@ -11,44 +11,49 @@
 {
     <div class="card shadow-sm rounded" style="min-height: 500px;">
         <div class="card-body">
-            <table class="table mb-0">
-                <thead>
-                <div class="container">
-    <h1 class="text-center mb-2">Dina upplagda artiklar</h1>
-        <div class="form-group mt-2 mb-2 text-center">
-            <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>
-        </div>
-        <hr>
+
+            <h1 class="text-center mb-2">Dina upplagda artiklar</h1>
+            <div class="form-group mt-2 mb-2 text-center">
+                <a asp-controller="Article" asp-action="Create" class="btn btn-primary">Lägg till en ny artikel</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+
+                    <hr>
+                
                     <tr>
                         <th></th>
                         <th>Namn</th>
                         <th>Beskrivning</th>
                         <th>Pris</th>
-                        <th>Uppladdad</th>
+                        <th >Uppladdad</th>
                         <th>Åtgärder</th>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var article in Model.Articles)
-                    {
-                        <tr>
-                            <td style="width: 10%;">
-                                <img src="@article.ImageUrl" alt="Article Image" style="width: 50%;">
-                            </td>
-                            <td><b>@article.Name</b></td>
-                            <td>@article.Description</td>
-                            <td>@article.Price</td>
-                            <td>@article.Published</td>
-                            <td>
-                                <a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id"
-                                    class="btn btn-success btn-sm mr-2">Redigera</a>
-                                <a asp-controller="Article" asp-action="Delete" asp-route-previous="home" asp-route-id="@article.Id"
-                                    class="btn btn-danger btn-sm">Radera</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var article in Model.Articles)
+                        {
+                            <tr>
+                                <td style="width: 10%;">
+                                    <img src="@article.ImageUrl" alt="Article Image" style="width: 50%;">
+                                </td>
+                                <td style="width: 18%;"><b>@article.Name</b></td>
+                                <td style="width: 18%;">@article.Description</td>
+                                <td style="width: 18%;">@article.Price</td>
+                                <td style="width: 18%;">@article.Published</td>
+                                <td style="width: 18%;">
+                                    <a asp-controller="Article" asp-action="Edit" asp-route-id="@article.Id"
+                                        class="btn btn-success btn-sm mr-2">Redigera</a>
+                                    <a asp-controller="Article" asp-action="Delete" asp-route-previous="home" asp-route-id="@article.Id"
+                                        class="btn btn-danger btn-sm">Radera</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 }
