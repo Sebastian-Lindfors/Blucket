@@ -10,7 +10,7 @@ public class ArticleController(ApplicationDbContext context) : Controller
 {
     public async Task<IActionResult> Index()
     {
-        var articles = await context.Articles.ToListAsync();
+        var articles = await context.Articles.OrderByDescending(a => a.Published).ToListAsync();
 
         var vm = new ArticleIndexVm { Articles = articles };
         return View(vm);

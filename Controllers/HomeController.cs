@@ -21,7 +21,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var articles = await _context.Articles.Where(a => a.UserId == userId).ToListAsync();
+        var articles = await _context.Articles.Where(a => a.UserId == userId).OrderByDescending(a => a.Published).ToListAsync();
 
         var vm = new HomeIndexVm { Articles = articles };
 
