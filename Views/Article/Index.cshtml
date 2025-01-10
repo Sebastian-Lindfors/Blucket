@@ -23,17 +23,17 @@
 
                     <hr>
                     <tr>
-                        <th></th>
-                        <th>
+                        <th style="padding-right: 5em;"></th>
+                        <th style="width: 20%;">
                             Namn
                         </th>
-                        <th>
+                        <th style="width: 20%;">
                             Beskrivning
                         </th>
-                        <th>
+                        <th style="width: 20%;">
                             Pris
                         </th>
-                        <th>
+                        <th style="width: 20%;">
                             Uppladdad
                         </th>
                         @if (isAdmin)
@@ -46,10 +46,10 @@
                     @foreach (var article in Model.Articles)
                     {
                         <tr>
-                            <td style="width: 2em;">
-                                <img src="@article.ImageUrl" alt="Article Image" style="width: 2em;">
+                            <td style="width: 5%;">
+                                <img src="@article.ImageUrl" alt="Article Image" style="width: 100%;">
                             </td>
-                            <td>
+                            <td style="width: 18%;">
                                 @if (isAdmin)
                                 {
                                     <a asp-action="Edit" asp-route-id="@article.Id">
@@ -61,18 +61,18 @@
                                     <b>@article.Name</b>
                                 }
                             </td>
-                            <td>
+                            <td style="width: 18%;">
                                 @article.Description
                             </td>
-                            <td>
+                            <td style="width: 18%;">
                                 @article.Price kr
                             </td>
-                            <td>
+                            <td style="width: 18%;">
                                 @article.Published
                             </td>
                             @if (isAdmin)
                             {
-                                <td>
+                                <td style="width: 18%;">
                                     <a asp-action="Delete" asp-route-previous="article" asp-route-id="@article.Id"
                                         class="btn btn-danger">Radera</a>
                                 </td>

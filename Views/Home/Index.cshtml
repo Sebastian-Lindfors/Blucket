@@ -24,20 +24,20 @@
                     <hr>
                 
                     <tr>
-                        <th></th>
-                        <th>Namn</th>
-                        <th>Beskrivning</th>
-                        <th>Pris</th>
-                        <th >Uppladdad</th>
-                        <th>Åtgärder</th>
+                        <th style="padding-right: 5em;"></th>
+                        <th style="width: 20%;">Namn</th>
+                        <th style="width: 20%;">Beskrivning</th>
+                        <th style="width: 20%;">Pris</th>
+                        <th style="width: 20%;">Uppladdad</th>
+                        <th style="width: 20%;">Åtgärder</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach (var article in Model.Articles)
                         {
                             <tr>
-                                <td style="width: 2em;">
-                                    <img src="@article.ImageUrl" alt="Article Image" style="width: 2em;">
+                                <td style="width: 5%;">
+                                    <img src="@article.ImageUrl" alt="Article Image" style="width: 100%;">
                                 </td>
                                 <td style="width: 18%;"><b>@article.Name</b></td>
                                 <td style="width: 18%;">@article.Description</td>
